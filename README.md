@@ -31,10 +31,10 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
        -  $p$: Fraction of initially infected individual in each block,
        -  $\textbf{A}^{(1)}$: first adjacency  matrix, 
        -  $\textbf{A}^{(2)}$: second adjacency  matrix,
-        - $\beta$:infection rate,
+        - $\beta$: infection rate,
        - $\mu$: recovery rate,
        - $T$: simulation duration,
-         -'states':  node state   
+       - 'states':  node state   
   
 - `Amount_of_interaction_of_SIS_Model_Over_Perioic_Temporal_Networks.py` has functions for finding the relationship between amount of interaction and epidemic spreading. 
     - Function `amount_of_interaction_of_static_network(A)` gives the amount of interaction of the static network and takes the adjacency matrix, $\textbf{A}$ as input.
