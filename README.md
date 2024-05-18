@@ -20,7 +20,7 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
 - `Simulation_of_SIS_Model_Over_Perioic_Temporal_Network.py` has functions  for simulating the linear, nonlinear and agent-based simulation of SIS model on switching networks. 
     - Function `get_trajectory(beta,mu,As,periods,durations,z0)` simulates the linear SIS model on switching networks. The inputs are:
         - "$\beta$": infection rate,
-        - "$mu$": recovery rate,
+        - "$\mu$": recovery rate,
         -"$\textbf{As}$": list of all adjacency matrices,
         -"periods": period of the system,
         -"durations": list of the time interval,
