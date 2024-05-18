@@ -25,7 +25,7 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
         - 'periods': period of the system,
         - 'durations': list of the time interval,
         - $z0$: initial condition  
-    - Function `get_trajectory_2(beta, mu, As, periods, durations, z0)` simulates the nonlinear SIS model on switching networks which takes same input as function `get_trajectory(beta,mu,As,periods,durations,z0)' and the output of the function is the state of the system at each time step of nonlinear SIS model.
+    - Function `get_trajectory_2(beta, mu, As, periods, durations, z0)` simulates the nonlinear SIS model on switching networks which takes same input as function `get_trajectory(beta,mu,As,periods,durations,z0)` and the output of the function is the state of the system at each time step of nonlinear SIS model.
     - Function  `fraction_of_infected_individual(number_of_simulations,p,A1,A2,beta, mu,T,states)` is used to find the fraction of infected individual at each community for agent-based simulation of SIS model simulation on switching networks. The input functions are:
               - 'number_of_simulations': number of simulation, 
               -  $p$: Fraction of initially infected individual in each block,
