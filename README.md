@@ -46,7 +46,7 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
       
 - `Perturbation_theory_for_the_largest_Floquet_exponent.py`  has function for finding the first order approximation of largest Floquet exponent. 
     - Function `approximate_matrix(beta,mu,TT,barA)` computes the first-order approximation of  matrix, $\mathcal{T}$ (i.e TT) and the input of this function are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix.
-    - Function `approximate_largest_eigenvalue(beta,mu,T,barA)` measures the first-order approximation of the largest eigenvalue of $\mathcal{T}$ (i.e TT)  and input of this function same as input of the function  `approximate_matrix(beta,mu,T,barA)`.
+    - Function `approximate_largest_eigenvalue(beta,mu,TT,barA)` measures the first-order approximation of the largest eigenvalue of $\mathcal{T}$ (i.e TT)  and input of this function same as input of the function  `approximate_matrix(beta,mu,TT,barA)`.
     - Function `approximate_lamda_F(beta,mu,TT,barA)` computes the first order approximate largest Floquet exponent,  $\lambda_{\text{F}}$ and the input of this function are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix.
 
 - `Parrondo’s_paradox_and_anti-phase_oscillation.py`  computes the anti-phase oscillation.
