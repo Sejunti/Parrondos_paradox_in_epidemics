@@ -43,12 +43,12 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
     - Function `power_method(A,tolerance)` is used for finding the largest eigenvalue of the matrix by Power method whose input is $\textbf{A}$ the adjacency matrix and the tolerance.
     - Function `get_x_intercept(function,tolerance)` computes the root of the system by root finding algorithm which takes function and tolerance as input.
     - Function `compute_epidemic_threshold(As_list)` measures the epidemic threshold for both static and switching network which takes the list of all adjacency matrices as input and returns the epidemic threshold for static networks and switching networks.
-    
--`Perturbation_theory_for_the_largest_Floquet_exponent.py`  has function for finding the first order approximation of largest Floquet exponent. 
+      
+- `Perturbation_theory_for_the_largest_Floquet_exponent.py`  has function for finding the first order approximation of largest Floquet exponent. 
+    - Function `approximate_matrix(beta,mu,T,barA)` computes the first-order approximation of  matrix $\mathcal{T}$ and the input of this function are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix.
+    - Function `approximate_largest_eigenvalue(beta,mu,T,barA)` measures the first-order approximation of the largest eigenvalue of $\mathcal{T}$ and input of this function same as input of the function  `approximate_matrix(beta,mu,T,barA)`.
+    - Function `approximate_lamda_F(beta,mu,T,barA)` computes the first order approximate largest Floquet exponent,  $\lambda_{\text{F}}$ and the input of this function are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix.
 
-   - Function `approximate_matrix(beta,mu,T,barA)` computes the first-order approximation of  matrix $\mathcal{T}$ and the input of this function are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix.
-   - Function `approximate_largest_eigenvalue(beta,mu,T,barA)` measures the first-order approximation of the largest eigenvalue of $\mathcal{T}$ and input of this function same as input of the function  `approximate_matrix(beta,mu,T,barA)`.
-   - Function `approximate_lamda_F(beta,mu,T,barA)` computes the first order approximate largest Floquet exponent,  $\lambda_{\text{F}}$ and the input of this function are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix.
 
 -`Parrondo’s_paradox_and_anti-phase_oscillation.py`  computes the anti-phase oscillation.
 
