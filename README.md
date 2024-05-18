@@ -27,6 +27,7 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
         - $z0$: initial condition  
     - Function `get_trajectory_2(beta, mu, As, periods, durations, z0)` simulates the nonlinear SIS model on switching networks which takes same input as function `get_trajectory(beta,mu,As,periods,durations,z0)` and the output of the function is the state of the system at each time step of nonlinear SIS model.
     - Function  `fraction_of_infected_individual(number_of_simulations,p,A1,A2,beta, mu,T,states)` is used to find the fraction of infected individual at each community for agent-based simulation of SIS model simulation on switching networks. The input functions are:
+      
               - 'number_of_simulations': number of simulation, 
               -  $p$: Fraction of initially infected individual in each block,
               -  $\textbf{A}^{(1)}$: first adjacency  matrix, 
@@ -47,12 +48,12 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
     
 -`Perturbation_theory_for_the_largest_Floquet_exponent.py`  has function for finding the first order approximation of largest Floquet exponent. 
   - Function `approximate_matrix(beta,mu,T,barA)` computes the first-order approximation of  matrix $\mathcal{T}$ and the input of this function are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix.
-  - Function `approximate_largest_eigenvalue(beta,mu,T,barA)` measures the first-order approximation of the largest eigenvalue of $\mathcal{T}$ and input of this function same as input of the function  'approximate_matrix(beta,mu,T,barA)'.
+  - Function `approximate_largest_eigenvalue(beta,mu,T,barA)` measures the first-order approximation of the largest eigenvalue of $\mathcal{T}$ and input of this function same as input of the function  `approximate_matrix(beta,mu,T,barA)`.
   - Function `approximate_lamda_F(beta,mu,T,barA)` computes the first order approximate largest Floquet exponent,  $\lambda_{\text{F}}$ and the input of this function are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix.
 
 -`Parrondo’s_paradox_and_anti-phase_oscillation.py`  computes the anti-phase oscillation.
    - Function `fraction_anti_phase(z, times, t_start, t_end)` measures the anti-phase oscillation in one period as output and  the input functions are:
-      - '$z$': state of the system at each time step of linear SIS model
+      - $z$ : state of the system at each time step of linear SIS model
       - 'times': time step
       - 't_start': period start value
       - 't_end': period end value
