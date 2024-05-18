@@ -13,7 +13,7 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
 
 - `SIS_Model_Over_Perioic_Temporal_Networks.py` contains  some functions. These functions can be used to determine the the largest eigenvalue of a matrix and the largest Floquet exponent. 
 
-    - Function 'extract_max_eval_vary_betas(betas,mu,A)'  use for computing the largest eigenvalue of the static network which takes infection rate ($\beta$), recovery rate ($mu$) and the adjacency matrix, $\textbf{A}$ as input and gives the largest eigenvalue as output. 
+    - Function 'extract_max_eval_vary_betas(betas,mu,A)'  use for computing the largest eigenvalue of the static network which takes infection rate ($\beta$), recovery rate ($\mu$) and the adjacency matrix, $\textbf{A}$ as input and gives the largest eigenvalue as output. 
     - Function 'get_max_flo_exponent(beta,T)'  computes  the largest Floquet exponent, $\lambda_{\text{F}}$. The input of this function is infection rate, $\beta$ and the period, $T$ and gives $\lambda_{\text{F}}$ as output. 
     
     
