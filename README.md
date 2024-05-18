@@ -21,10 +21,10 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
     - Function `get_trajectory(beta,mu,As,periods,durations,z0)` simulates the linear SIS model on switching networks. The inputs are:
         - "$\beta$": infection rate,
         - "$\mu$": recovery rate,
-        -"$\textbf{As}$": list of all adjacency matrices,
-        -"periods": period of the system,
-        -"durations": list of the time interval,
-        -"$z0$": initial condition 
+        - "$\textbf{As}$": list of all adjacency matrices,
+        - "periods": period of the system,
+        - "durations": list of the time interval,
+        - "$z0$": initial condition 
     - The function gives state of the system at each time step of linear SIS model as output. 
     - Function 'get_trajectory_2(beta, mu, As, periods, durations, z0)' simulates the nonlinear SIS model on switching networks which takes same input as function `get_trajectory(beta,mu,As,periods,durations,z0)' and the output of the function is the state of the system at each time step of nonlinear SIS model.
     - Function  'fraction_of_infected_individual(number_of_simulations,p,A1,A2,beta, mu,T,states)' is used to find the fraction of infected individual at each community for agent-based simulation of SIS model simulation on switching networks. The input functions are:
@@ -53,10 +53,10 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
 
 -'Parrondo’s_paradox_and_anti-phase_oscillation.py'  computes the anti-phase oscillation.
    - Function 'fraction_anti_phase(z, times, t_start, t_end)' measures the anti-phase oscillation in one period as output and  the input functions are:
-      -' $z$': state of the system at each time step of linear SIS model
+      - '$z$': state of the system at each time step of linear SIS model
       - 'times': time step
-      -'t_start': period start value
-      -'t_end': period end value
+      - 't_start': period start value
+      - 't_end': period end value
    
        
 
