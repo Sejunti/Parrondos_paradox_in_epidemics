@@ -49,16 +49,16 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
     - Function `approximate_largest_eigenvalue(beta,mu,T,barA)` measures the first-order approximation of the largest eigenvalue of $\mathcal{T}$ and input of this function same as input of the function  `approximate_matrix(beta,mu,T,barA)`.
     - Function `approximate_lamda_F(beta,mu,T,barA)` computes the first order approximate largest Floquet exponent,  $\lambda_{\text{F}}$ and the input of this function are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix.
 
-
--`Parrondo’s_paradox_and_anti-phase_oscillation.py`  computes the anti-phase oscillation.
-
+- `Parrondo’s_paradox_and_anti-phase_oscillation.py`  computes the anti-phase oscillation.
     - Function `fraction_anti_phase(z, times, t_start, t_end)` measures the anti-phase oscillation in one period as output and  the input functions are:
-      - $z$ : state of the system at each time step of linear SIS model
+       - $z$ : state of the system at each time step of linear SIS model
       - 'times': time step
       - 't_start': period start value
-      - 't_end': period end value
-   
-       
+      - 't_end': period end value 
+
+
+
+
 
                
     
