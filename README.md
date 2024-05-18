@@ -1,5 +1,4 @@
 # Parrondos_paradox_in_epidemics
-# Parrondos_paradox_in_epidemics
 
 When you use the code, please cite the following  paper:
 [Parrondo’s paradox in susceptible-infectious-susceptible dynamics over periodic temporal networks]
@@ -13,14 +12,14 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
 
 - `SIS_Model_Over_Perioic_Temporal_Networks.py` contains  some functions. These functions can be used to determine the the largest eigenvalue of a matrix and the largest Floquet exponent. 
 
-    - Function 'extract_max_eval_vary_betas(betas,mu,A)'  use for computing the largest eigenvalue of the static network which takes infection rate ($\beta$), recovery rate ($\mu$) and the adjacency matrix, $\textbf{A}$ as input and gives the largest eigenvalue as output. 
-    - Function 'get_max_flo_exponent(beta,T)'  computes  the largest Floquet exponent, $\lambda_{\text{F}}$. The input of this function is infection rate, $\beta$ and the period, $T$ and gives $\lambda_{\text{F}}$ as output. 
+    - Function 'extract_max_eval_vary_betas(betas,mu,A)'  use for computing the largest eigenvalue of the static network which takes infection rate (betas: $\beta$), recovery rate (mu: $\mu$) and the adjacency matrix, $\textbf{A}$ as input and gives the largest eigenvalue, $\lambda_{\text{max}} as output. 
+    - Function 'get_max_flo_exponent(beta,T)'  computes  the largest Floquet exponent, $\lambda_{\text{F}}$. The input of this function is infection rate and the period, $T$ and gives $\lambda_{\text{F}}$ as output. 
     
     
 - `Simulation_of_SIS_Model_Over_Perioic_Temporal_Network.py` has functions  for simulating the linear, nonlinear and agent-based simulation of SIS model on switching networks. 
     - Function `get_trajectory(beta,mu,As,periods,durations,z0)` simulates the linear SIS model on switching networks. The function gives state of the system at each time step of linear SIS model as output and the inputs are:
-        - $\beta$: infection rate,
-        - $\mu$: recovery rate,
+        - $\beta$: infection rate (beta),
+        - $\mu$: recovery rate (mu),
         - $\textbf{As}$: list of all adjacency matrices,
         - 'periods': period of the system,
         - 'durations': list of the time interval,
