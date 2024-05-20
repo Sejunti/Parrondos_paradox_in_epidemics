@@ -23,44 +23,35 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
         - 'periods': period of the dynamical system,
         - 'durations': list of the time interval,
         - $z0$: initial condition.  
-Its output is the state of the system at each time step.
+Its output is the state of the system at each time step. [NM: Please unindent this line. I don't know how to do that in markdown. I mean the text of this line should start at the same horizontal position as "Function" above.]
     - Function `get_trajectory_2(beta, mu, As, periods, durations, z0)` simulates the nonlinear deterministic SIS dynamics on switching networks. Its inputs and outputs are the same as those of `get_trajectory(beta,mu,As,periods,durations,z0)`.
-    - Function  `fraction_of_infected_individual(number_of_simulations,p,A1,A2,beta, mu,T,states)` is used to find the fraction of infected individual at each community for agent-based simulation of SIS model simulation on switching networks. The input functions are:
+    - Function  `fraction_of_infected_individual(number_of_simulations,p,A1,A2,beta, mu,T,states)` finds the fraction of infectious nodes in each block for stochastic agent-based simulations on switching networks. Its inputs are:
         - 'number_of_simulations': number of simulation, 
-       -  $p$: Fraction of initially infected individual in each block,
-       -  $\textbf{A}^{(1)}$: first adjacency  matrix, 
-       -  $\textbf{A}^{(2)}$: second adjacency  matrix,
+       -  $p$: Fraction of initially infectious nodes in each block,
+       -  $\textbf{A}^{(1)}$: first adjacency matrix, 
+       -  $\textbf{A}^{(2)}$: second adjacency matrix,
         - $\beta$: infection rate (beta),
        - $\mu$: recovery rate (mu),
        - $T$: simulation duration,
-       - 'states':  node state   
+       - 'states': node state. [NM: You mean 'initial state of the nodes' ?] 
   
 - `Amount_of_interaction_of_SIS_Model_Over_Perioic_Temporal_Networks.py` has functions for finding the relationship between amount of interaction and epidemic spreading. 
-    - Function `amount_of_interaction_of_static_network(A)` gives the amount of interaction of the static network and takes the adjacency matrix, $\textbf{A}$ as input.
-    - Function `amount_of_interaction_of_switching_network(As, durations,T)` computes the amount of interaction for  switching  network and the list of all adjacency matrices, $\textbf{As}$, list of the time interval, durations and period, $T$ are the input of this function. 
+    - Function `amount_of_interaction_of_static_network(A)` gives the amount of interaction of the static network. Its input is the adjacency matrix, $\textbf{A}$.
+    - Function `amount_of_interaction_of_switching_network(As, durations,T)` gives the amount of interaction for the switching network. Its inputs are the list of all adjacency matrices, $\textbf{As}$, list of the time interval [NM: What do you mean by "time interval"?], duration of each static network in one period, and period, $T$. 
     
-- `Generality_of_the_Parrondo’s_paradox.py` is used to measure the epidemic threshold for both the static and switching network. 
-    - Function `power_method(A,tolerance)` is used for finding the largest eigenvalue of the matrix by Power method whose input is $\textbf{A}$ the adjacency matrix and the tolerance.
-    - Function `get_x_intercept(function,tolerance)` computes the root of the system by root finding algorithm which takes function and tolerance as input.
+- `Generality_of_the_Parrondo’s_paradox.py` computes the epidemic threshold for both the static and switching networks. 
+    - Function `power_method(A,tolerance)` finds the largest eigenvalue of the matrix by the power method. Its inputs are the adjacency matrix, $\textbf{A}$, and the tolerance of the power method.
+    - Function `get_x_intercept(function,tolerance)` computes the root of the system [NM: What do you mean by 'system'? 'system' is almost always a vague word, so I'd either avoid or specify. Do you mean 'the root of the function given as input'?] by a root finding algorithm.
     - Function `compute_epidemic_threshold(As_list)` measures the epidemic threshold for both static and switching network which takes the list of all adjacency matrices as input and returns the epidemic threshold for static networks and switching networks.
       
 - `Perturbation_theory_for_the_largest_Floquet_exponent.py`  has function for finding the first order approximation of largest Floquet exponent. 
-    - Function `approximate_matrix(beta,mu,T,barA)` computes the first-order approximation of  matrix, $\mathcal{T}$ and the input of this function are the infection rate, recovery rate, period, $T$ and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix.
-    - Function `approximate_largest_eigenvalue(beta,mu,T,barA)` measures the first-order approximation of the largest eigenvalue of $\mathcal{T}$   and input of this function same as input of the function  `approximate_matrix(beta,mu,T,barA)`.
-    - Function `approximate_lamda_F(beta,mu,T,barA)` computes the first order approximate largest Floquet exponent,  $\lambda_{\text{F}}$ and the input of this function are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix.
+    - Function `approximate_matrix(beta,mu,T,barA)` computes the first-order approximation of matrix $\mathcal{T}$ [NM: You say somewhere above 'matrix', but it is better to say which matrix, like here. If it is mathcalT up there, you should say so because you are saying it here.]. Its inputs are the infection rate, recovery rate, period (i.e., $T$), and the time-averaged adjacency matrix (i.e., $\overline{\textbf{A}}$).
+    - Function `approximate_largest_eigenvalue(beta,mu,T,barA)` computes the first-order approximation of the largest eigenvalue of $\mathcal{T}$. Its inputs are the same as those of `approximate_matrix(beta,mu,T,barA)`.
+    - Function `approximate_lamda_F(beta,mu,T,barA)` computes the first-order approximation of the largest Floquet exponent, $\lambda_{\text{F}}$. Its inputs are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix [NM: Why dont you write 'the same as those of  `approximate_matrix(beta,mu,T,barA)`'? Am I wrong?].
 
 - `Parrondo’s_paradox_and_anti-phase_oscillation.py`  computes the anti-phase oscillation.
-    - Function `fraction_anti_phase(z, times, t_start, t_end)` measures the anti-phase oscillation in one period as output and  the input functions are:
-       - $z$ : state of the system at each time step of linear SIS model,
-      - 'times': time step,
-      - 't_start': period start value,
-      - 't_end': period end value 
-
-
-
-
-
-               
-    
-    
-    
+    - Function `fraction_anti_phase(z, times, t_start, t_end)` computes the extent of anti-phase oscillation, $q$ [Is this what you mean? 'measures the anti-phase oscillation' does not make sense. You cannot measure a phenomenon unless you say a meausrement/index.]. Its inputs are:
+       - $z$ : state of the linearized [NM: This 'linear' or 'linearized' (whichever) can be removed, right?] SIS model at each time step,
+      - 'times': time step [NM: of what?],
+      - 't_start': period start value [NM: I don't understand this.],
+      - 't_end': period end value. [NM: I don't understand this one, either.]
