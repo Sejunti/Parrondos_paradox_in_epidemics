@@ -4,27 +4,27 @@ When you use the code, please cite the following  paper:
 [Parrondo’s paradox in susceptible-infectious-susceptible dynamics over periodic temporal networks]
 
 
-This repository provides the code written in Python for the Parrondo's paradox ananlysis in SIS model over periodic temporal network.
+This repository provides Python code for analysis of the Parrondo's paradox in the susceptible-infectious-susceptile (SIS) dynamics over periodically switching temporal networks.
 
 
 # How to use the code?
 We divided the whole analysis into a few parts and for each part provided a Python (.py) file containing relevant functions and required libraries. 
 
-- `SIS_Model_Over_Perioic_Temporal_Networks.py` contains  some functions. These functions can be used to determine the the largest eigenvalue of a matrix and the largest Floquet exponent. 
+- `SIS_Model_Over_Perioic_Temporal_Networks.py` contains some functions. These functions can be used to determine the the largest eigenvalue of a matrix and the largest Floquet exponent. 
 
-    - Function 'extract_max_eval_vary_betas(betas,mu,A)'  use for computing the largest eigenvalue of the static network which takes infection rate (betas: $\beta$), recovery rate (mu: $\mu$) and the adjacency matrix, $\textbf{A}$ as input and gives the largest eigenvalue, $\lambda_{\text{max}}$ as output. 
-    - Function 'get_max_flo_exponent(beta,T)'  computes  the largest Floquet exponent, $\lambda_{\text{F}}$. The input of this function is infection rate and the period, $T$ and gives $\lambda_{\text{F}}$ as output. 
+    - Function 'extract_max_eval_vary_betas(betas,mu,A)' computesg the largest eigenvalue of the static network. It takes the infection rate (betas: $\beta$), recovery rate (mu: $\mu$), and adjacency matrix, $\textbf{A}$, as input and gives the largest eigenvalue, $\lambda_{\text{max}}$ as output. 
+    - Function 'get_max_flo_exponent(beta,T)' computes the largest Floquet exponent, $\lambda_{\text{F}}$. It takes the infection rate and the period, $T$, as input and gives $\lambda_{\text{F}}$ as output. 
     
-    
-- `Simulation_of_SIS_Model_Over_Perioic_Temporal_Network.py` has functions  for simulating the linear, nonlinear and agent-based simulation of SIS model on switching networks. 
-    - Function `get_trajectory(beta,mu,As,periods,durations,z0)` simulates the linear SIS model on switching networks. The function gives state of the system at each time step of linear SIS model as output and the inputs are:
+- `Simulation_of_SIS_Model_Over_Perioic_Temporal_Network.py` has functions for running the linear deterministic SIS dynamics (i.e., linearlized individual-based approximation), nonlinear deterministic SIS dynamics (i.e., individual-based approximation), and stochastic agent-based SIS dynamics on switching networks. 
+    - Function `get_trajectory(beta,mu,As,periods,durations,z0)` simulates the linear deterministic SIS dynamics on switching networks. Its inputs are:
         - $\beta$: infection rate (beta),
         - $\mu$: recovery rate (mu),
         - $\textbf{As}$: list of all adjacency matrices,
         - 'periods': period of the system,
         - 'durations': list of the time interval,
-        - $z0$: initial condition  
-    - Function `get_trajectory_2(beta, mu, As, periods, durations, z0)` simulates the nonlinear SIS model on switching networks which takes same input as function `get_trajectory(beta,mu,As,periods,durations,z0)` and the output of the function is the state of the system at each time step of nonlinear SIS model.
+        - $z0$: initial condition.  
+    Its output is the state of the system at each time step.
+    - Function `get_trajectory_2(beta, mu, As, periods, durations, z0)` simulates the nonlinear deterministic SIS dynamics on switching networks. Its inputs and outputs are the same as those of `get_trajectory(beta,mu,As,periods,durations,z0)`.
     - Function  `fraction_of_infected_individual(number_of_simulations,p,A1,A2,beta, mu,T,states)` is used to find the fraction of infected individual at each community for agent-based simulation of SIS model simulation on switching networks. The input functions are:
         - 'number_of_simulations': number of simulation, 
        -  $p$: Fraction of initially infected individual in each block,
