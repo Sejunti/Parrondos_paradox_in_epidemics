@@ -1,11 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-
-
 import numpy as np
 import matplotlib.pyplot as plt
-get_ipython().run_line_magic('pylab', 'inline')
 from random import *
 from scipy import sparse
 from scipy.integrate import odeint
@@ -13,45 +7,7 @@ from scipy import linalg as la
 import math
 from random import sample
 from numpy.random import Generator, PCG64
-
-
-#################################################################################################
-
-
-def M_matrix(beta,mu,A):
-    """
-    Create M matrix for linear SIS epidemic model.
-    Parameters:
-              beta(float):Infection rate
-              mu(float): Recovery rate
-              A(numpy array): Adjacency matrix 
-    Returns:
-            M(numpy array): Matrix M
-    """
-    M = beta*A - mu*np.eye(len(A))     
-    return M
-  
-#################################################################################################
-def create_Ms(beta,mu,As): 
-    """
-    Create M matrices for linear SIS epidemic model over switching temporal network.
-    Parameters:
-              beta(float):Infection rate
-              mu(float): Recovery rate
-              As(numpy array): All Adjacency matrices 
-    Returns:
-            Ms(numpy array): Matrices M
-    """
-    N = len(As[0]) # number of nodes
-    T = len(As) # number of adjacency matrices
-    Ms = []
-    for t in range(T):
-        Ms.append(M_matrix(beta,mu,As[t]))
-    return Ms
-
-
-#################################################################################################
-
+from SIS_Model_Over_Perioic_Temporal_Networks import *  
 
 def matrix_exponetial(a):
     """
@@ -67,9 +23,7 @@ def matrix_exponetial(a):
     s=np.dot(s2,inv(u)) 
     return s
 
-
 #################################################################################################
-
 
 # Linear Simulation of SIS model 
 def integrate_interval(M,times,start): 
@@ -78,7 +32,7 @@ def integrate_interval(M,times,start):
     Parameters:
               M(numpy array): Matrix 
               times(numpy array): Time interval
-              start(numpy array):Initial Condiiton
+              start(numpy array):Initial condiiton
     Returns:
              u(numpy array): State of the system at each time step
     """
@@ -86,17 +40,18 @@ def integrate_interval(M,times,start):
 
     u = [ list(np.dot(matrix_exponetial( (time-times[0]) *M), start)) for time in times]
     return u
+
 #################################################################################################
 
 def get_trajectory(beta,mu,As,periods,durations,z0):
     """
-    Function for generating the trajectory of the system over time.  
+    Function simulates the linear deterministic SIS dynamics on switching networks.   
     Parameters:
               beta(float):Infection rate
               mu(float): Recovery rate
-              As(numpy array): All Adjacency matrices 
-              periods(Integer): Number of period 
-              durations(list): Duartion of the time interval
+              As(numpy array): List of all adjacency matrices 
+              periods(Integer): Period of the dynamical system
+              durations(list): List of the time interval
               z0(numpy array): Initial condition
     Returns:
              times(numpy array): Time step
@@ -107,20 +62,14 @@ def get_trajectory(beta,mu,As,periods,durations,z0):
     durations = durations*periods
     transition_times = list(np.cumsum(np.array(durations)))
     transition_times.insert(0,0)
-
-    # initial condition
-    u0 = z0
-        
+    u0 = z0 # initial condition    
     Ms = create_Ms(beta,mu,As_temp)
-
     
     for s in range(len(Ms)):
-
         start_time = transition_times[s]
         end_time = transition_times[s+1]
         n = 1000*(end_time-start_time)
         interval_times = np.linspace(start_time,end_time,n)
-
         u = integrate_interval(Ms[s],interval_times,u0)
         u0 = u[-1]
         if s==0:
@@ -128,24 +77,20 @@ def get_trajectory(beta,mu,As,periods,durations,z0):
             z = u
         if s>0:
             times = np.concatenate((times,interval_times))
-            z = np.concatenate((z,u))
-        
+            z = np.concatenate((z,u))       
     return times,z
-
 
 #################################################################################################
 
-
 #Nonlinear Simulation of the SIS model 
-
 def integrate_interval_2(M,As, times, start):
     """
     Function for integrating the nonlinear SIS model over the interval.  
     Parameters:
               M(numpy array): Matrix 
-              As(numpy array): All Adjacency matrices 
+              As(numpy array): All adjacency matrices 
               times(numpy array): Time interval
-              start(numpy array):Initial Condiiton
+              start(numpy array):Initial condiiton
     Returns:
              u(numpy array): State of the system at each time step
     """
@@ -155,19 +100,20 @@ def integrate_interval_2(M,As, times, start):
         A=As[1]
     def diff_eq(u, t): #Function for defining the nonlinear SIS model.  
         return np.dot(M, u) - beta * np.dot(np.dot(np.diag(u), A), u)
-
     u = odeint(diff_eq, start, times)
     return u
+
 #################################################################################################
+
 def get_trajectory_2(beta, mu, As, periods, durations, z0):
     """
-    Function for generating the trajectory of the system over time.  
+    Function simulates the nonlinear deterministic SIS dynamics on switching networks.
     Parameters:
               beta(float):Infection rate
               mu(float): Recovery rate
-              As(numpy array): All Adjacency matrices 
-              periods(Integer): Number of period 
-              durations(list): Duartion of the time interval
+              As(numpy array): List of all adjacency matrices 
+              periods(Integer): Period of the dynamical system
+              durations(list): List of the time interval
               z0(numpy array): Initial condition
     Returns:
              times(numpy array): Time step
@@ -177,20 +123,15 @@ def get_trajectory_2(beta, mu, As, periods, durations, z0):
     durations = durations * periods
     transition_times = list(np.cumsum(np.array(durations)))
     transition_times.insert(0, 0)
-
-    # initial condition
-    u0 = z0
-
+    u0 = z0 # initial condition
     Ns = create_Ns(beta, mu, As_temp)
-#     Us = create_Us(u0, As_temp)
-
+    
     for s in range(len(Ns)):
         start_time = transition_times[s]
         end_time = transition_times[s + 1]
         n = 1000 * (end_time - start_time)
         interval_times = np.linspace(start_time, end_time, n)
-
-        u = integrate_interval_2(Ms[s], As_temp[s], interval_times, u0)  # Pass As_temp[s] as A
+        u = integrate_interval_2(Ms[s], As_temp[s], interval_times, u0)  
         u0 = u[-1]
         if s == 0:
             times = interval_times
@@ -203,15 +144,12 @@ def get_trajectory_2(beta, mu, As, periods, durations, z0):
 
 #################################################################################################
 
-
 # Agent based model simulation by Gillespie Algorithm
 #--- Set up PRNG: ---
 seed= 42                     # Set seed of PRNG state 
 rg = Generator(PCG64(seed))  # Initialize bit generator (here PCG64) with seed
 
-
 #################################################################################################
-
 
 def calculate_node_propensities(A, states, beta, mu):
     """
@@ -235,9 +173,7 @@ def calculate_node_propensities(A, states, beta, mu):
             Lambda_list[i] = mu
     return Lambda_list
 
-
 #################################################################################################
-
 
 def draw_next_event_direct(Lambda_list, states):
     '''
@@ -265,13 +201,11 @@ def draw_next_event_direct(Lambda_list, states):
 
     return i,tau
 
-
 #################################################################################################
-
 
 def update_states(A, states, X1, X2, Lambda_list, i):
     '''
-    Function for update the states of nodes and propensities after an event
+    Function for updating the states of nodes and propensities after an event.
     Parameters:
               A(numpy array): Adjacency matrix 
               states:  Node state 
@@ -320,9 +254,7 @@ def update_states(A, states, X1, X2, Lambda_list, i):
 
     return X1, X2, Lambda_list, states
 
-
 #################################################################################################
-
 
 def direct_method_SIS_graph(A1,A2, beta, mu, T, states):
     '''
@@ -360,7 +292,7 @@ def direct_method_SIS_graph(A1,A2, beta, mu, T, states):
             X_t.append([T, S1, I1, S2, I2])
             break
 
-        i, tau = draw_next_event_direct(Lambda_list,  states) #Direct event sampling step
+        i, tau = draw_next_event_direct(Lambda_list,  states) # Direct event sampling step
 
         t += tau
 
@@ -374,9 +306,7 @@ def direct_method_SIS_graph(A1,A2, beta, mu, T, states):
 
     return np.array(X_t).transpose()
 
-
 #################################################################################################
-
 
 def initialize(A, p): 
     '''
@@ -385,7 +315,7 @@ def initialize(A, p):
               A(numpy array): Adjacency  matrix 
               p(float): Fraction of initially infected individual 
     Returns:
-            states: Node state  
+            states: Current node state  
     '''
 
     N = len(A)
@@ -395,22 +325,19 @@ def initialize(A, p):
     states[infec_ind1 + infec_ind2] = 1
     return states
 
-
 #################################################################################################
 
-
-def fraction_of_infected_individual(number_of_simulations,p,A1,A2,beta, mu,T,states):
+def fraction_of_infected_individual(number_of_simulations,p,A1,A2,beta, mu,T):
     '''
-    Function for finding the fraction of infected individual in each block. 
+    Function finds the fraction of infectious nodes in each block for stochastic agent-based simulations on switching networks.
     Parameters:
               number_of_simulations(integer): Number of simulation 
-              p(float): Fraction of initially infected individual 
+              p(float): Fraction of initially infectious nodes in each block
               A1(numpy array): First adjacency  matrix 
               A2(numpy array): Second adjacency  matrix 
               beta(float):Infection rate
               mu(float): Recovery rate
-              T(integer): Simulation duration
-              states:  Node state   
+              T(integer): Simulation duration  
     Returns:
             X_array(numpy array): Current Node state  
             
