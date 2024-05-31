@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[5]:
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
@@ -17,8 +11,6 @@ from scipy import sparse
 import networkx as nx
 from sklearn.cluster import KMeans
 from scipy.sparse import csr_matrix
-
-
 
 
 def power_method(A,tolerance):
@@ -44,10 +36,7 @@ def power_method(A,tolerance):
 
     return beta,z 
 
-
 ###############################################################
-
-
 
 def M_matrix(beta,mu,A):
     """
@@ -66,11 +55,11 @@ def M_matrix(beta,mu,A):
 
 def create_Ms(beta,mu,As): 
     """
-    Create M matrices for linear SIS epidemic model over switching temporal network.
+    Create M matrices for the linear SIS epidemic model on switching temporal network.
     Parameters:
               beta(float):Infection rate
               mu(float): Recovery rate
-              As(numpy array): All Adjacency matrices 
+              As(numpy array): All adjacency matrices 
     Returns:
             Ms(numpy array): Matrices M
     """
@@ -83,18 +72,16 @@ def create_Ms(beta,mu,As):
 
 ###############################################################
 
-
-
 def T_matrix(US,invUS,lams,beta,durations):
     """
-    Function for find matrix T by singular value decomposition for the SIS model over switching temporal network.
+    Function for finding matrix T by singular value decomposition for the SIS model on switching temporal network.
     Parameters:
               US: Eigenvectors
               invUS: Inverse eigenvectors
               lams: Eigenvalue
               beta(float):Infection rate
               durations(list): Duartion of the time interval
-              As(numpy array): All Adjacency matrices 
+              As(numpy array): All adjacency matrices 
     Returns:
            Matrix_T(numpy array): Matrix T
     """
@@ -111,14 +98,11 @@ def T_matrix(US,invUS,lams,beta,durations):
         
     return Matrix_T
 
-
 ###############################################################
-
-
 
 def get_x_intercept(function,tolerance):
     """
-    Function for finding the root by root finding algorithm.
+    Function computes the root of the function by a root finding algorithm. 
     Parameters:
               function: Given function
               tolerance(float): Tolerance value
@@ -128,37 +112,32 @@ def get_x_intercept(function,tolerance):
     sol = scipy.optimize.root_scalar(fun, bracket=[0.0, 0.1], method='brentq',xtol=tolerance)
     return sol.root
 
-
 ###############################################################
-
-
 
 def compute_epidemic_threshold(As_list):
     """
-    Function for computing the epidemic threshold for both static and switching network. 
+    Function measures the epidemic threshold for both static and switching network. 
     Parameter:
               As_list(numpy array): List of all adjacency matrices
               
     Returns:
            sol.root(float): Root of the function
-           M1_list: Epidemic threshold for first static network 
-           M2_list: Epidemic threshold for second static network 
-           Fl_list: Epidemic threshold for switching network
+           M1_list: Epidemic threshold for the first static network 
+           M2_list: Epidemic threshold for the second static network 
+           Fl_list: Epidemic threshold for the switching network
     """
     M1_list = [] # Epidemic threshold for first static network 
     M2_list = [] # Epidemic threshold for second static network 
     Fl_list = [] # Epidemic threshold for switching network
-
     for As in As_list:
         US=[]
         invUS=[]
         lams=[]
-    for A in As:
-        lam,U=eig(A)
-        lams.append(lam)
-        US.append(U)
-        invUS.append(inv(U))
-   
+        for A in As:
+            lam,U=eig(A)
+            lams.append(lam)
+            US.append(U)
+            invUS.append(inv(U))
     def lam_3(beta):
         M_beta=monodromy_matrix_2(US,invUS,lams,[beta],dts)
         e,_ = power_method(M_beta)
