@@ -1,25 +1,13 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-
-
-
 import numpy as np
 import matplotlib.pyplot as plt
-get_ipython().run_line_magic('pylab', 'inline')
 from scipy.integrate import odeint
 import sympy as sp
-sp.init_printing()
 from scipy import linalg as la
 import math
 
-
-#################################################################################################
-
-
 def M_matrix(beta,mu,A):
     """
-    Function for create M matrix for linear SIS epidemic model.
+    Function to create matrix M for the linear SIS epidemic model. 
     Parameters:
               beta(float):Infection rate
               mu(float): Recovery rate
@@ -29,14 +17,15 @@ def M_matrix(beta,mu,A):
     """
     M = beta*A - mu*np.eye(len(A))     
     return M
-  
-#################################################################################################
+
+##################################################################################################
+
 def create_Ms(beta,mu,As): 
     """
-    Function for create M matrices for linear SIS epidemic model over switching temporal network.
+    Function to create M matrices for linear SIS epidemic model over switching temporal network.
     Parameters:
               beta(float):Infection rate
-              mu(float): Recovery rate
+              mu(float): Recovery rate 
               As(numpy array): All Adjacency matrices 
     Returns:
             Ms(numpy array): Matrices M
@@ -47,16 +36,18 @@ def create_Ms(beta,mu,As):
     for t in range(T):
         Ms.append(M_matrix(beta,mu,As[t]))
     return Ms
+
 #################################################################################################
+
 def extract_max_eval_vary_betas(betas,mu,A):
     """
-    Function for computing largest eigenvalue for M matrix. 
+    Function computes the largest eigenvalue of the static network. 
     Parameters:
               betas(numpy array): Infection rate
               mu(float): Recovery rate
               A(numpy array): Adjacency matrix 
     Returns:
-            max_evals(float): Largest eigenvalue of matrix M.
+            max_evals(float): Largest eigenvalue of matrix M
     """
     max_evals = np.zeros(len(betas))
     for t,beta in enumerate(betas):
@@ -65,9 +56,7 @@ def extract_max_eval_vary_betas(betas,mu,A):
         max_evals[t] = max(e1)
     return max_evals
 
-
 #################################################################################################
-
 
 def monodromy_matrix(Ms,durations):
     """
@@ -76,7 +65,7 @@ def monodromy_matrix(Ms,durations):
               Ms(numpy array): Matrices M
               durations(list): Duartion of the time interval
     Returns:
-            Monodromy(numpy array): Monodromy matrix $\hat{M}$
+            Monodromy(numpy array): Monodromy matrix 
     """
 
     expMdts = []
@@ -93,15 +82,13 @@ def monodromy_matrix(Ms,durations):
         
     return Monodromy
 
-
 #################################################################################################
 
-
-def get_max_flo_mult(beta):
+def get_max_flo_multiplier(beta):
     """
-    Function for creating largest Floquet multiplier. 
+    Function for creating the largest Floquet multiplier. 
     Parameter:
-              beta(float): Infection Rate
+              beta(float): Infection rate
     Returns:
             max(Floquet_multipliers)(float): Largest Floquet multiplier
     """
@@ -109,13 +96,14 @@ def get_max_flo_mult(beta):
     mono = monodromy_matrix(Ms,durations)
     floquet_multipliers,floquet_vectors = eig(mono)
     return max(floquet_multipliers)
- #################################################################################################
+
+##################################################################################################
 
 def get_max_flo_exponent(beta,T):
     """
-    Function for computing largest Floquet exponent. 
+    Function for computing the largest Floquet exponent. 
     Parameter:
-              beta(float): Infection Rate
+              beta(float): Infection rate
               T(Integer): Period
     Returns:
             lamda_F(float): Largest Floquet exponent
