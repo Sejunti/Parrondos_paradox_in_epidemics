@@ -33,7 +33,6 @@ def power_method(A,tolerance):
         z_old = z
         x = A@z
         beta = z@x
-
     return beta,z 
 
 ###############################################################
@@ -94,8 +93,7 @@ def T_matrix(US,invUS,lams,beta,durations):
         expMdts.append(expMdt)
     Matrix_T = np.eye(len(US[0]))   
     for t,expMdt in enumerate(expMdts):
-        Matrix_T = dot(expMdt,Monodromy)
-        
+        Matrix_T = dot(expMdt,Monodromy)       
     return Matrix_T
 
 ###############################################################
