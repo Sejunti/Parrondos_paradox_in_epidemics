@@ -16,8 +16,7 @@ def amount_of_interaction_of_static_network(A):
     Returns:
             s1(float): Amount of interaction of the static network
     """
-    upper_triangular_entry = np.triu(A)
-    s1=np.sum(upper_triangular_entry)
+    s1=np.sum(A)
     return s1
 
 
@@ -34,8 +33,8 @@ def amount_of_interaction_of_switching_network(As, durations,T):
             s2(float): Amount of interaction of the switching network.
     """
     T=sum(durations)
-    interaction = [amount_of_interaction_of_static_network(A) for A in As]
-    s2= np.mean(interaction) * T / len(As)
+    interaction = durations[0]*np.sum(As[0])+durations[1]*np.sum(As[1])
+    s2= interaction/T
     return s2
 
 
