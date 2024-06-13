@@ -15,7 +15,7 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
     - Function 'extract_max_eval_vary_betas(betas,mu,A)' computes the largest eigenvalue of the static network. Its inputs are the infection rate (betas: $\beta$), recovery rate (mu: $\mu$), and adjacency matrix, $\textbf{A}$. Its output is the largest eigenvalue, $\lambda_{\text{max}}$. 
     - Function 'get_max_flo_exponent(beta,T)' computes the largest Floquet exponent, $\lambda_{\text{F}}$. Its inputs are the infection rate and the period, $T$. Its output is $\lambda_{\text{F}}$. 
     
-- `Simulation_of_SIS_Model_Over_Perioic_Temporal_Network.py` has functions for running the linear deterministic SIS dynamics (i.e., linearlized individual-based approximation), nonlinear deterministic SIS dynamics (i.e., individual-based approximation), and stochastic agent-based SIS dynamics on switching networks. 
+- `Simulation_of_SIS_Model_Over_Perioic_Temporal_Network.py` has functions for running the linear deterministic SIS dynamics (i.e., linearized individual-based approximation), nonlinear deterministic SIS dynamics (i.e., individual-based approximation), and stochastic agent-based SIS dynamics on switching networks. 
     - Function `get_trajectory(beta,mu,As,periods,durations,z0)` simulates the linear deterministic SIS dynamics on switching networks. Its inputs are:
         - $\beta$: infection rate (beta),
         - $\mu$: recovery rate (mu),
@@ -23,35 +23,32 @@ We divided the whole analysis into a few parts and for each part provided a Pyth
         - 'periods': period of the dynamical system,
         - 'durations': list of the time interval,
         - $z0$: initial condition.  
-Its output is the state of the system at each time step. [NM: Please unindent this line. I don't know how to do that in markdown. I mean the text of this line should start at the same horizontal position as "Function" above.]
+Its output is the state of the system at each time step. 
     - Function `get_trajectory_2(beta, mu, As, periods, durations, z0)` simulates the nonlinear deterministic SIS dynamics on switching networks. Its inputs and outputs are the same as those of `get_trajectory(beta,mu,As,periods,durations,z0)`.
-    - Function  `fraction_of_infected_individual(number_of_simulations,p,A1,A2,beta, mu,T,states)` finds the fraction of infectious nodes in each block for stochastic agent-based simulations on switching networks. Its inputs are:
+    - Function  `fraction_of_infected_individual(number_of_simulations,p,A1,A2,beta, mu,T)` finds the fraction of infectious nodes in each block for stochastic agent-based simulations on switching networks. Its inputs are:
         - 'number_of_simulations': number of simulation, 
        -  $p$: Fraction of initially infectious nodes in each block,
        -  $\textbf{A}^{(1)}$: first adjacency matrix, 
        -  $\textbf{A}^{(2)}$: second adjacency matrix,
         - $\beta$: infection rate (beta),
        - $\mu$: recovery rate (mu),
-       - $T$: simulation duration,
-       - 'states': node state. [NM: You mean 'initial state of the nodes' ?] 
-  
+       - $T$: simulation duration
+      
 - `Amount_of_interaction_of_SIS_Model_Over_Perioic_Temporal_Networks.py` has functions for finding the relationship between amount of interaction and epidemic spreading. 
     - Function `amount_of_interaction_of_static_network(A)` gives the amount of interaction of the static network. Its input is the adjacency matrix, $\textbf{A}$.
-    - Function `amount_of_interaction_of_switching_network(As, durations,T)` gives the amount of interaction for the switching network. Its inputs are the list of all adjacency matrices, $\textbf{As}$, list of the time interval [NM: What do you mean by "time interval"?], duration of each static network in one period, and period, $T$. 
+    - Function `amount_of_interaction_of_switching_network(As, durations,T)` gives the amount of interaction for the switching network. Its inputs are the list of all adjacency matrices, $\textbf{As}$, duration of each static network in one period, and period, $T$. 
     
 - `Generality_of_the_Parrondo’s_paradox.py` computes the epidemic threshold for both the static and switching networks. 
-    - Function `power_method(A,tolerance)` finds the largest eigenvalue of the matrix by the power method. Its inputs are the adjacency matrix, $\textbf{A}$, and the tolerance of the power method.
-    - Function `get_x_intercept(function,tolerance)` computes the root of the system [NM: What do you mean by 'system'? 'system' is almost always a vague word, so I'd either avoid or specify. Do you mean 'the root of the function given as input'?] by a root finding algorithm.
+    - Function `power_method(A,tolerance)` finds the largest eigenvalue of the matrix, $\textbf{A}$ by the power method. Its inputs are the adjacency matrix, $\textbf{A}$, and the tolerance of the power method.
+    - Function `get_x_intercept(function,tolerance)` computes the root of the function [NM: What do you mean by 'system'? 'system' is almost always a vague word, so I'd either avoid or specify. Do you mean 'the root of the function given as input'?] [Maisha: System means the function.I changed it as function now.]by a root finding algorithm.
     - Function `compute_epidemic_threshold(As_list)` measures the epidemic threshold for both static and switching network which takes the list of all adjacency matrices as input and returns the epidemic threshold for static networks and switching networks.
       
 - `Perturbation_theory_for_the_largest_Floquet_exponent.py`  has function for finding the first order approximation of largest Floquet exponent. 
-    - Function `approximate_matrix(beta,mu,T,barA)` computes the first-order approximation of matrix $\mathcal{T}$ [NM: You say somewhere above 'matrix', but it is better to say which matrix, like here. If it is mathcalT up there, you should say so because you are saying it here.]. Its inputs are the infection rate, recovery rate, period (i.e., $T$), and the time-averaged adjacency matrix (i.e., $\overline{\textbf{A}}$).
+    - Function `approximate_matrix(beta,mu,T,barA)` computes the first-order approximation of matrix $\mathcal{T}$. Its inputs are the infection rate, recovery rate, period (i.e., $T$), and the time-averaged adjacency matrix (i.e., $\overline{\textbf{A}}$).
     - Function `approximate_largest_eigenvalue(beta,mu,T,barA)` computes the first-order approximation of the largest eigenvalue of $\mathcal{T}$. Its inputs are the same as those of `approximate_matrix(beta,mu,T,barA)`.
-    - Function `approximate_lamda_F(beta,mu,T,barA)` computes the first-order approximation of the largest Floquet exponent, $\lambda_{\text{F}}$. Its inputs are the infection rate, recovery rate, period and $\overline{\textbf{A}}$ is the time-averaged adjacency matrix [NM: Why dont you write 'the same as those of  `approximate_matrix(beta,mu,T,barA)`'? Am I wrong?].
+    - Function `approximate_lamda_F(beta,mu,T,barA)` computes the first-order approximation of the largest Floquet exponent, $\lambda_{\text{F}}$. Its inputs are the same as those of `approximate_matrix(beta,mu,T,barA)`. [NM: Why dont you write 'the same as those of  `approximate_matrix(beta,mu,T,barA)`'? Am I wrong?] [Maisha: Yes you are write. I changed this.]
 
-- `Parrondo’s_paradox_and_anti-phase_oscillation.py`  computes the anti-phase oscillation.
-    - Function `fraction_anti_phase(z, times, t_start, t_end)` computes the extent of anti-phase oscillation, $q$ [Is this what you mean? 'measures the anti-phase oscillation' does not make sense. You cannot measure a phenomenon unless you say a meausrement/index.]. Its inputs are:
-       - $z$ : state of the linearized [NM: This 'linear' or 'linearized' (whichever) can be removed, right?] SIS model at each time step,
-      - 'times': time step [NM: of what?],
-      - 't_start': period start value [NM: I don't understand this.],
-      - 't_end': period end value. [NM: I don't understand this one, either.]
+- `Parrondo’s_paradox_and_anti-phase_oscillation.py` computes the anti-phase oscillation.
+    - Function `fraction_anti_phase(z, t_start, t_end)` measures the extent of anti-phase oscillation by the fraction of time during one cycle or period. Its inputs are:
+       - $z$ : state of the SIS model at each time step,
+       
