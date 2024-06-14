@@ -1,4 +1,5 @@
-# Parrondos_paradox_in_epidemics
+# Parrondos_paradox_in_the susceptible-infectious-susceptible_(SIS)_model_on_temporal_networks
+
 
 When you use the code, please cite the following  paper:
 [Parrondo’s paradox in susceptible-infectious-susceptible dynamics over periodic temporal networks]
