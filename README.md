@@ -1,4 +1,4 @@
-# Parrondos_paradox_in_the susceptible-infectious-susceptible_(SIS)_model_on_temporal_networks
+# Parrondos_paradox_in_the susceptible-infectious_susceptible_(SIS)_model_on_temporal_networks
 
 
 When you use the code, please cite the following  paper:
